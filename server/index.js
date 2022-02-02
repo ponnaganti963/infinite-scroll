@@ -24,7 +24,6 @@ app.use(json());
 
 //routes
 
-// app.get('/', (req, res) => res.send("Hello world!"));
 
 const postRoutes = require('./routes/post');
 app.use("/",postRoutes);
