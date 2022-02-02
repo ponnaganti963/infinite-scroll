@@ -14,9 +14,10 @@ function App() {
     .then((res)=> {
       if (res.data.data.length === 0){ 
         setisEnd(true);
-        return;
+      }else{
+        setData([...data,...res.data.data]);
       }
-      setData([...data,...res.data.data]);
+      
     })
     .catch((err)=> console.log(err))
   },[skip]);
@@ -24,10 +25,9 @@ function App() {
 
   const handleScroll = (e) => { 
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
-
+    console.log(offsetHeight,scrollHeight,scrollTop);
     if(offsetHeight + scrollTop >= scrollHeight) {
       setSkip(data?.length);
-      console.log('asdsad');
     }
   }
   return (
@@ -36,7 +36,7 @@ function App() {
        <h1 className="text-4xl">MERN</h1>
        <h1 className="text-3xl text-accent italic">Infinite Scroll</h1>
      </div>
-     <div className="h-screen overflow-auto snap-mandatory snap-y" onScroll={handleScroll}>
+     <div className="h-screen overflow-y-scroll no-scrollbar" onScroll={handleScroll}>
        {
          data?.map((post)=> (
            <Post key={post._id} {...post} />
